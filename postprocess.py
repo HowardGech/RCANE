@@ -24,7 +24,7 @@ parser = argparse.ArgumentParser(description='Postprocess the predicted copy num
 parser.add_argument('--data-path', type=str, help='The path to load the predicted data')
 parser.add_argument('--segment-path', type=str, default='data/start_end_chr_in_segs.csv', help='The path to load the segment information')
 parser.add_argument('--save-dir', type=str, default='data/predict',help='The directory to save the postprocessed result')
-parser.add_argument('--save-name', type=str, help='The name of the postprocessed result ending with .csv')
+parser.add_argument('--save-name', type=str, help='The name of the postprocessed result without extension')
 parser.add_argument('--log-dir', type=str, default='data/log', help='The directory to save the log')
 parser.add_argument('--gene-names', type=str, default='data/gene_names_in_segments.csv', help='The path to gene names per segment')
 parser.add_argument('--threshold', nargs=2, type=float, default=[-0.25, 0.2], help='The threshold for deletion and amplification')
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     data_frame = pd.DataFrame({'Sample': profile_list, "Chromosome": data_chr * data_cna.shape[0], "Start": data_start * data_cna.shape[0], "End": data_end * data_cna.shape[0], 'SegMean': cna_list, 'Status': cna_status_list, 'Gene': gene_list})
     # save the data frame to a tsv file
     if args.save_name is not None:
-        save_path = f'{args.save_dir}/{args.save_name}'
+        save_name = f'{args.save_dir}/{args.save_name}.tsv'
     else:
         save_name = f'{args.save_dir}/{data_file}_postprocessed.tsv'
     data_frame.to_csv(save_name, sep='\t', index=False)

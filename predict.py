@@ -25,7 +25,8 @@ class TeeStderr:
 parser = argparse.ArgumentParser(description='Predict the copy number using the trained RCANE model')
 parser.add_argument('--data-path', type=str, help='The path to load the data')
 parser.add_argument('--model-path', type=str, help='The path to load the model')
-parser.add_argument('--save-dir', type=str, default='data/predict',help='The directory to save the predicted result')
+parser.add_argument('--save-dir', type=str, default='data/predict',help='The directory to save the predicted result without extension')
+parser.add_argument('--save-name', type=str, help='The name of the predicted result file')
 parser.add_argument('--log-dir', type=str, default='data/log', help='The directory to save the log')
 parser.add_argument('--predict-config', type=str, default='predict_config.yaml', help='The path to prediction configuration')
 parser.add_argument('--gene-names', type=str, default='data/gene_names_in_segments.csv', help='The path to gene names per segment')
@@ -88,7 +89,10 @@ if __name__ == '__main__':
     logging.info(f'Saving predicted copy numbers to {args.save_dir}...')
     if os.path.exists(args.save_dir) == False:
         os.makedirs(args.save_dir)
-    pred_file = f'{args.save_dir}/predicted_{".".join(args.data_path.split("/")[-1].split(".")[:-1])}.npz'
+    if args.save_name is not None:
+        pred_file = f'{args.save_dir}/{args.save_name}.npz'
+    else:
+        pred_file = f'{args.save_dir}/predicted_{".".join(args.data_path.split("/")[-1].split(".")[:-1])}.npz'
     if 'profile' in data_array.files:
         np.savez(pred_file, rna = data_array['rna'], cna = pred_cna_all, cohort = cohort_str, profile = data_profile)
     else:

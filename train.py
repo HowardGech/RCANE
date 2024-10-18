@@ -174,4 +174,5 @@ if __name__ == '__main__':
     torch.save(model, model_file)
     os.remove(temp_model_file)
     logging.info('Model saved!')
+    print('Training finished!')
     sys.stderr = original_stderr
