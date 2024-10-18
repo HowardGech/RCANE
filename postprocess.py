@@ -82,6 +82,6 @@ if __name__ == "__main__":
     else:
         save_name = f'{args.save_dir}/{data_file}_postprocessed.tsv'
     data_frame.to_csv(save_name, sep='\t', index=False)
-    logging.info(f'Saved the postprocessed data to {save_name}2')
+    logging.info(f'Saved the postprocessed data to {save_name}')
     print(f'Saved the postprocessed data to {save_name}')
     sys.stderr = original_stderr
