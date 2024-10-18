@@ -1,0 +1,100 @@
+seg_nums: 1514
+genes_in_seg: 20
+chr_index: 
+  - 150
+  - 102
+  - 83
+  - 57
+  - 71
+  - 77
+  - 76
+  - 55
+  - 58
+  - 58
+  - 78
+  - 83
+  - 29
+  - 55
+  - 53
+  - 70
+  - 91
+  - 26
+  - 97
+  - 38
+  - 18
+  - 39
+  - 50
+
+activation: LeakyReLU
+activation_args:
+  negative_slope: 0.1
+use_act: True
+include_offset: True
+include_layernorm: True
+include_lstm: True
+include_GATTN: True
+include_debiaser: True
+
+emb_out: 32
+mlp_offset_depth: 2
+mlp_offset_hidden: 32
+mlp_cohort_depth: 2
+mlp_cohort_hidden: 32
+
+mlp_rna_depth: 2
+mlp_rna_hidden: 32
+mlp_rna_out: 32
+
+
+mlp_concat_depth: 2
+mlp_concat_hidden: 64
+mlp_concat_out: 64
+
+lstm_depth: 4
+lstm_out: 32
+lstm_dropout: 0.2
+
+gattn_depth: 2
+gattn_heads: 2
+gattn_out: 32
+gattn_hidden: 32
+gattn_dropout: 0.2
+
+mlp_out_depth: 1
+
+debiaser_depth: 4
+cancer_types: 
+  - ACC
+  - BLCA
+  - BRCA
+  - CESC
+  - CHOL
+  - COAD
+  - DLBC
+  - ESCA
+  - GBM
+  - HNSC
+  - KICH
+  - KIRC
+  - KIRP
+  - LAML
+  - LGG
+  - LIHC
+  - LUAD
+  - LUSC
+  - MESO
+  - OV
+  - PAAD
+  - PCPG
+  - PRAD
+  - READ
+  - SARC
+  - SKCM
+  - STAD
+  - TGCT
+  - THCA
+  - THYM
+  - UCEC
+  - UCS
+  - UVM
+

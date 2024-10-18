@@ -1,0 +1,13 @@
+device: cuda
+batch_size: 32
+epochs: 130
+optimizer: Adam
+optimizer_args:
+  lr: 0.001
+criterion: MSELoss
+criterion_args:
+  reduction: none
+log_steps: 1
+save_steps: 1
+accumulation_steps: 1
+mask_prob: 0.25
