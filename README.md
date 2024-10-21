@@ -16,8 +16,11 @@ Your RNA expression file should be a `.csv` file where rows represent samples an
 
 Open a terminal in the root directory and run the following command:
 
-```shellscript
-python preprocess.py --data-path path/to/RNAseq.csv --save-name saved_file
+```{r, engine = 'bash', eval = FALSE}
+for foo in (ls bar)
+do
+  echo $foo
+done
 ```
 
 Replace `path/to/RNAseq.csv` with the actual path to your RNA-seq file, and `saved_file` with the name you want for the preprocessed output (without the file extension). Other optional arguments include:
