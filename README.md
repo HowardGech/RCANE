@@ -16,7 +16,7 @@ Your RNA expression file should be a `.csv` file where rows represent samples an
 
 Open a terminal in the root directory and run the following command:
 
-```terminal
+```console
 python preprocess.py --data-path path/to/RNAseq.csv --save-name saved_file
 ```
 
