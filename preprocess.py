@@ -52,8 +52,8 @@ if __name__ == "__main__":
     gene_names = np.loadtxt(args.gene_names, delimiter=',', dtype=str)
     
     logging.info(f'Loaded {data.shape[0]} samples and {data.shape[1]-2} genes')
-    data_profile = data['ID']
-    data_cohort = data['cohort']
+    data_profile = data['SampleID']
+    data_cohort = data['CancerType']
     data_rna = np.empty((data.shape[0], gene_names.shape[0], gene_names.shape[1]), dtype=float)
     pbar = tqdm([(i, j) for i in range(gene_names.shape[0]) for j in range(gene_names.shape[1])], file=sys.stdout)
     existing_genes = np.empty(gene_names.shape, dtype='U25')
@@ -61,12 +61,12 @@ if __name__ == "__main__":
     for i, j in pbar:
         pbar.set_description(f'Processing gene {gene_names[i][j]}')
         if gene_names[i][j] == "None":
-            data_rna[:, i, j] = np.nan
+            data_rna[:, i, j] = .0
             existing_genes[i, j] = "None"
             continue
         gene_name = gene_names[i][j]
         if gene_name not in data.columns:
-            data_rna[:, i, j] = np.nan
+            data_rna[:, i, j] = .0
             existing_genes[i, j] = "None"
             continue
         existing_genes[i, j] = gene_name
@@ -74,7 +74,7 @@ if __name__ == "__main__":
         
     logging.info(f'Preprocessed RNA-seq data with shape {data_rna.shape}')
     logging.info(f'Saving preprocessed data to {args.save_dir}/{save_name}.npz...')
-    np.savez(f'{args.save_dir}/{save_name}.npz', rna=data_rna, profile=data_profile, cohort=data_cohort)
+    np.savez(f'{args.save_dir}/{save_name}.npz', rna=data_rna, ID=data_profile, cohort=data_cohort)
     with open(f'data/gene_names_{save_name}.csv', 'w', newline='') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_NONE)
         writer.writerows(existing_genes)
