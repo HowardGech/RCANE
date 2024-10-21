@@ -1,0 +1,7 @@
+*.npz
+*.tsv
+*.pt
+*.pth
+*.log
+*.pdf
+*.txt

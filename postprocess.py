@@ -52,11 +52,11 @@ if __name__ == "__main__":
     gene_names = [','.join(gene_names[i][gene_names[i] != "None"]) for i in range(gene_names.shape[0])]
     
     data_cna = data_array['cna']
-    data_profile = data_array['profile']
+    data_profile = data_array['ID']
     data_segment = pd.read_csv(args.segment_path)
-    data_chr = list(data_segment['chr'])
-    data_start = list(data_segment['start'])
-    data_end = list(data_segment['end'])
+    data_chr = list(data_segment['chrom'])
+    data_start = list(data_segment['loc.start'])
+    data_end = list(data_segment['loc.end'])
     data_cna_status = np.empty(data_cna.shape, dtype=str)
     data_cna_status[np.isnan(data_cna)] = 'NA'
     data_cna_status[data_cna<=args.threshold[0]] = '-'
@@ -75,7 +75,7 @@ if __name__ == "__main__":
         gene_list += gene_names
         
         
-    data_frame = pd.DataFrame({'Sample': profile_list, "Chromosome": data_chr * data_cna.shape[0], "Start": data_start * data_cna.shape[0], "End": data_end * data_cna.shape[0], 'SegMean': cna_list, 'Status': cna_status_list, 'Gene': gene_list})
+    data_frame = pd.DataFrame({'ID': profile_list, "chrom": data_chr * data_cna.shape[0], "loc.start": data_start * data_cna.shape[0], "loc.end": data_end * data_cna.shape[0], 'seg.mean': cna_list, 'status': cna_status_list, 'gene': gene_list})
     # save the data frame to a tsv file
     if args.save_name is not None:
         save_name = f'{args.save_dir}/{args.save_name}.tsv'

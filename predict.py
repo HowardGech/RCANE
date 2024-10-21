@@ -59,8 +59,8 @@ if __name__ == '__main__':
     edge_pos_list = [all_edges['positive'][cancer].to(device) for cancer in model.cancer_types]
     edge_neg_list = [all_edges['negative'][cancer].to(device) for cancer in model.cancer_types]
     data_cohort = torch.tensor([COHORTS.index(cohort_str[i]) for i in range(len(cohort_str))]).long().to(device)
-    if 'profile' in data_array.files:
-        data_profile = data_array['profile']
+    if 'ID' in data_array.files:
+        data_profile = data_array['ID']
     data_tensor = TensorDataset(data_rna, data_cohort)
     data_loader = DataLoader(data_tensor, batch_size=bs, shuffle=False)
     gene_names = np.loadtxt(args.gene_names, delimiter=',', dtype=str)
@@ -94,7 +94,7 @@ if __name__ == '__main__':
     else:
         pred_file = f'{args.save_dir}/predicted_{".".join(args.data_path.split("/")[-1].split(".")[:-1])}.npz'
     if 'profile' in data_array.files:
-        np.savez(pred_file, rna = data_array['rna'], cna = pred_cna_all, cohort = cohort_str, profile = data_profile)
+        np.savez(pred_file, rna = data_array['rna'], cna = pred_cna_all, cohort = cohort_str, ID = data_profile)
     else:
         np.savez(pred_file, rna = data_array['rna'], cna = pred_cna_all, cohort = cohort_str)
     logging.info(f'Predicted data saved!')

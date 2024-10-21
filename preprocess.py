@@ -52,8 +52,8 @@ if __name__ == "__main__":
     gene_names = np.loadtxt(args.gene_names, delimiter=',', dtype=str)
     
     logging.info(f'Loaded {data.shape[0]} samples and {data.shape[1]-2} genes')
-    data_profile = data['Profile']
-    data_cohort = data['Cohort']
+    data_profile = data['ID']
+    data_cohort = data['cohort']
     data_rna = np.empty((data.shape[0], gene_names.shape[0], gene_names.shape[1]), dtype=float)
     pbar = tqdm([(i, j) for i in range(gene_names.shape[0]) for j in range(gene_names.shape[1])], file=sys.stdout)
     existing_genes = np.empty(gene_names.shape, dtype='U25')
