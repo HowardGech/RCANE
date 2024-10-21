@@ -75,7 +75,7 @@ if __name__ == '__main__':
             model_param_dict = yaml.safe_load(f)
         model = RCANE(model_param_dict).to(device)
     else:
-        model = torch.load(args.model_path, map_location=device)
+        model = torch.load(args.model_path, map_location=device, weights_only=False)
     
     # Load the data
     COHORTS = model.cancer_types

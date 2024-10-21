@@ -49,7 +49,7 @@ if __name__ == '__main__':
     logging.info(args)
     bs = predict_config_dict['batch_size'] if 'batch_size' in predict_config_dict else 1
     logging.info(f'Loading model from {args.model_path}...')
-    model = torch.load(args.model_path, map_location=device)
+    model = torch.load(args.model_path, map_location=device, weights_only=False)
     logging.info(f'Loading data from {args.data_path}...')
     data_array = np.load(args.data_path, allow_pickle=True)
     data_rna = torch.tensor(data_array['rna'], dtype=torch.float).to(device)
@@ -93,7 +93,7 @@ if __name__ == '__main__':
         pred_file = f'{args.save_dir}/{args.save_name}.npz'
     else:
         pred_file = f'{args.save_dir}/predicted_{".".join(args.data_path.split("/")[-1].split(".")[:-1])}.npz'
-    if 'profile' in data_array.files:
+    if 'ID' in data_array.files:
         np.savez(pred_file, rna = data_array['rna'], cna = pred_cna_all, cohort = cohort_str, ID = data_profile)
     else:
         np.savez(pred_file, rna = data_array['rna'], cna = pred_cna_all, cohort = cohort_str)
