@@ -34,7 +34,7 @@ The preprocessed file should be a NumPy zip file `saved_file.npz` containing thr
 
 To run the model, execute the following command in the terminal:
 
-```pycon
+```fish
 python predict.py --model-path path/to/model.pth --data-path path/to/data.npz --save-name pred_file
 ```
 
