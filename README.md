@@ -23,7 +23,6 @@ python preprocess.py --data-path path/to/RNAseq.csv --save-name saved_file
 Replace `path/to/RNAseq.csv` with the actual path to your RNA-seq file, and `saved_file` with the name you want for the preprocessed output (without file extension). Other optional arguments include:
 
 - `save-dir`: the directory where the preprocessed files will be saved
-- `log-dir`: the directory of the logging file
 - `gene-names`: the path to the gene names file used to match the training data
 
 For default values and other information of these parameters, refer to `preprocess.py`.
@@ -41,7 +40,6 @@ python predict.py --model-path path/to/model.pth --data-path path/to/data.npz --
 Replace `path/to/model.pth` with the path to the pretrained model, `path/to/data.npz` with the preprocessed RNA file, and `pred_file` with your name of the prediction file (without file extension). Other optional arguments include:
 
 - `save-dir`: the directory where the predicted file will be saved
-- `log-dir`: the directory of the logging file
 - `predict-config`: the YAML configuration file for prediction
 - `gene-names`: the path to the gene names file matched to the training data
 - `edge-path`: the path to graph edge indices used in the Graph Attention layer
@@ -65,10 +63,43 @@ Replace `path/to/pred_file.npz` with the path to the prediction file, and `post_
     - `loc.start`: the start location of each segment on the chromosome
     - `loc.end`: the end location of each segment on the chromosome
 - `save-dir`: the directory where the post-processed file will be saved
-- `log-dir`: the directory for the logging file
 - `gene-names`: the path to the gene names file (should be the same as used in [Model Running](#step-2-model-running))
 - `threshold`: two values between which are considered SCNA neutral
 
-For default values and further details on these parameters, refer to `postprocess.py`.
+For default values and further details on these arguments, refer to `postprocess.py`.
 
 The post-processed file is a tab-separated `post_file.tsv` containing 6 columns: `ID`, `chrom`, `loc.start`, `loc.end`, `seg.mean`, `status`, and `gene`.
+
+## Measurement
+
+The `measurement` folder contains three files for data analysis and visualization:
+
+- `performance_evaluation.ipynb`: evaluates the prediction performance by comparing real and predicted SCNA data.
+- `plot_weights.ipynb`: plots Pearson's correlation coefficients between RNA and SCNA data versus the weights assigned to each gene in the trained RCANE model, highlighting the selected genes.
+- `visualization.ipynb`: visualizes the predicted whole-genome SCNAs.
+
+To use these notebooks, replace the file paths to the `RCANE` project and the appropriate file names, then click `Run All` in Jupyter Notebook to generate the results.
+
+
+## Training and Fine-Tuning
+
+For model training and fine-tuning, a `.npz` file containing RNA-seq data, copy number intensity data, and cancer types is required. To train a model from scratch, use the following command:
+
+```bash
+python train.py --new --data-path path/to/data.npz --save-dir folder/to/save/model
+```
+
+To fine-tune a model using a pretrained model, use the command:
+
+```bash
+python train.py --fine-tune --data-path path/to/data.npz --model-path path/to/pretrained/model.pth --save-dir folder/to/save/model 
+```
+
+Replace `path/to/data.npz` with the path to your data, `folder/to/save/model` with the directory to save the trained or fine-tuned model, and `path/to/pretrained/model.pth` with the path to the pretrained model for fine-tuning. Other important optional arguments include:
+
+- `train-config`: YAML configuration file for model training, including training device, optimizer, epochs, and more (see `train_config.yaml` for details)
+- `model-param`: YAML configuration file for building a new model, including segment lengths, neural network layers, activation functions, and more (see `model_param.yaml` for details)
+- `gene-names`: the path to the gene names file
+- `edge-path`: the path to graph edge indices used in the Graph Attention layer
+
+The trained model will be saved in `folder/to/save/model`, with filenames starting with `RCANE`, followed by information such as training time, and ending with the `.pth` file extension.
