@@ -16,7 +16,7 @@ Your RNA expression file should be a `.csv` file where rows represent samples an
 
 Open a terminal in the root directory and run the following command:
 
-```console
+```bash
 python preprocess.py --data-path path/to/RNAseq.csv --save-name saved_file
 ```
 
@@ -34,7 +34,7 @@ The preprocessed file should be a NumPy zip file `saved_file.npz` containing thr
 
 To run the model, execute the following command in the terminal:
 
-```fish
+```bash
 python predict.py --model-path path/to/model.pth --data-path path/to/data.npz --save-name pred_file
 ```
 
@@ -54,7 +54,7 @@ The SCNA prediction file is a NumPy zip file `pred_file.npz` containing `rna`, `
 
 After running the RCANE model, you can reformat the prediction file to a human-readable format. Run the following in the terminal:
 
-```console
+```bash
 python postprocess.py --data-path path/to/pred_file.npz --save-name post_file
 ```
 
