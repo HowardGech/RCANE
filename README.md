@@ -76,7 +76,7 @@ The `measurement` folder contains three files for data analysis and visualizatio
 
 - `performance_evaluation.ipynb`: evaluates the prediction performance by comparing real and predicted SCNA data.
 - `plot_weights.ipynb`: plots Pearson's correlation coefficients between RNA and SCNA data versus the weights assigned to each gene in the trained RCANE model, highlighting the selected genes.
-- `visualization.ipynb`: visualizes the predicted whole-genome SCNAs.
+- `visualization.ipynb`: visualizes the predicted whole-genome SCNAs. [Click here](assets/visualization.gif) for an example.
 
 To use these notebooks, replace the file paths to the `RCANE` project and the appropriate file names, then click `Run All` in Jupyter Notebook to generate the results.
 
