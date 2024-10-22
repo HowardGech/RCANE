@@ -6,3 +6,4 @@
 *.pdf
 *.txt
 TCGA_test_RNA.csv
+TCGA_test_gene_cna.csv

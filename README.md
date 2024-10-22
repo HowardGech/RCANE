@@ -8,11 +8,11 @@ To install RCANE, simply clone this repository and navigate to its root director
 
 ## Prediction
 
-To predict SCNAs using RNA-seq data, please follow the steps for [preprocessing](#preprocessing), [model running](#model-running), and [postprocessing](#postprocessing).
+To predict SCNAs using RNA-seq data, please follow the steps for [preprocessing](#step-1-preprocessing), [model running](#step-2-model-running), and [postprocessing](#step-3-postprocessing).
 
-### Preprocessing
+### Step 1. Preprocessing
 
-Your RNA expression file should be a `.csv` file where rows represent samples and columns represent genes. The file should begin with one column labeled `SampleID`, containing the sample IDs, and one column labeled `CancerType`, containing the cancer types using [TCGA abbreviations](https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables/tcga-study-abbreviations). The following columns should contain gene names, such as *EGFR* and *AC096540.1*. To ensure accurate and robust results, please make sure your expression values are normalized by $\log_2(1+\mathrm{TPM})$ and that batch effects have been corrected. See `data/predict/TCGA_test_RNA.csv` for reference.
+Your RNA expression file should be a `.csv` file where rows represent samples and columns represent genes. The file should begin with one column labeled `SampleID`, containing the sample IDs, and one column labeled `CancerType`, containing the cancer types using [TCGA abbreviations](https://gdc.cancer.gov/resources-tcga-users/tcga-code-tables/tcga-study-abbreviations). The following columns should contain gene names, such as *EGFR* and *AC096540.1*. To ensure accurate and robust results, please make sure your expression values are normalized by $\log_2(1+\mathrm{TPM})$ and that batch effects have been corrected. See `data/predict/TCGA_test_RNA.csv` as an example.
 
 Open a terminal in the root directory and run the following command:
 
@@ -30,7 +30,7 @@ For default values and other information of these parameters, refer to `preproce
 
 The preprocessed file should be a NumPy zip file `saved_file.npz` containing three components: `rna`, `cohort`, and `ID`, along with a gene names file `gene_names_saved_file.csv` denoting the matched genes of the input RNA file.
 
-### Model Running
+### Step 2. Model Running
 
 To run the model, execute the following command in the terminal:
 
@@ -42,7 +42,7 @@ Replace `path/to/model.pth` with the path to the pretrained model, `path/to/data
 
 - `save-dir`: the directory where the predicted file will be saved
 - `log-dir`: the directory of the logging file
-- `predict-config`: the configuration file for prediction
+- `predict-config`: the YAML configuration file for prediction
 - `gene-names`: the path to the gene names file matched to the training data
 - `edge-path`: the path to graph edge indices used in the Graph Attention layer
 
@@ -50,7 +50,7 @@ For default values and further details on these parameters, refer to `predict.py
 
 The SCNA prediction file is a NumPy zip file `pred_file.npz` containing `rna`, `cna`, `cohort`, and `ID`.
 
-### Postprocessing
+### Step 3. Postprocessing
 
 After running the RCANE model, you can reformat the prediction file to a human-readable format. Run the following in the terminal:
 
