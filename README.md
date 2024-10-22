@@ -34,7 +34,7 @@ The preprocessed file should be a NumPy zip file `saved_file.npz` containing thr
 
 To run the model, execute the following command in the terminal:
 
-```console
+```fish
 python predict.py --model-path path/to/model.pth --data-path path/to/data.npz --save-name pred_file
 ```
 
@@ -66,7 +66,7 @@ Replace `path/to/pred_file.npz` with the path to the prediction file, and `post_
     - `loc.end`: the end location of each segment on the chromosome
 - `save-dir`: the directory where the post-processed file will be saved
 - `log-dir`: the directory for the logging file
-- `gene-names`: the path to the gene names file (should be the same as used in [Model Running](#model-running))
+- `gene-names`: the path to the gene names file (should be the same as used in [Model Running](#step-2-model-running))
 - `threshold`: two values between which are considered SCNA neutral
 
 For default values and further details on these parameters, refer to `postprocess.py`.
