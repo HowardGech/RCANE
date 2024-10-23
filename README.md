@@ -1,9 +1,9 @@
 # RCANE
 
-RCANE is a deep learning algorithm designed for predicting somatic copy number aberrations (SCNAs) across multiple cancer types using RNA-seq data. The dataset used for training and evaluating the method, along with a pre-trained model based on TCGA data and a fine-tuned model using DepMap cell line data, can be found [here](https://doi.org/10.5281/zenodo.13953644).
+RCANE is a deep learning algorithm designed for predicting somatic copy number aberrations (SCNAs) across multiple cancer types using RNA-seq data. The dataset used for training and evaluating the method, along with a pre-trained model based on TCGA data and a fine-tuned model using DepMap cell line data, can be found [here](https://zenodo.org/records/13975633).
 
 ## Installation
-To install RCANE, simply clone this repository and navigate to its root directory. Alternatively, you can download the zip file and unzip it. To reproduce the following results, please also download the zip file from [here](https://doi.org/10.5281/zenodo.13953644), unzip it, and merge the two root folders.
+To install RCANE, simply clone this repository and navigate to its root directory. Alternatively, you can download the zip file and unzip it. To reproduce the following results, please also download the zip file from [here](https://zenodo.org/records/13975633), unzip it, and merge the two root folders.
 
 
 ## Prediction
