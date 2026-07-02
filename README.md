@@ -5,6 +5,12 @@ RCANE is a deep learning algorithm designed for predicting somatic copy number a
 ## Installation
 To install RCANE, simply clone this repository and navigate to its root directory. Alternatively, you can download the zip file and unzip it. To reproduce the following results, please also download the zip file from [here](https://doi.org/10.5281/zenodo.13953634), unzip it, and merge the two root folders.
 
+We recommend creating a fresh conda environment for the package, and install dependencies in the `requirements.txt`. A suggested fresh-env sequence is:
+```bash
+conda create -n rcane python=3.12 -y && conda activate rcane
+pip install -r requirements.txt
+```
+
 
 ## Prediction
 
